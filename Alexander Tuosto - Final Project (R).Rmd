@@ -50,9 +50,16 @@ classregdata=truthdata %>%
 
 Here, I'm actually conducting my regressions. I'm taking the data I filtered for each of the genres and running 2 kinds of regressions. The first is the Regression that sees how total plays changes in recessions, changes in the unemployment rate and percentage changes in the PCE price index and the University of Michigan Consumer Sentiment index.
 
+Variable Definitions:
+Total.Month.Plays = Continuous variable showing sum of all plays in a given month
+REC = Binary Variable showing recessions, 1=recession 0=no recession
+UNRATE = Continuous variable showing Unemployment Rate, Unemployed people/total labor force
+PCE= Continuous variable showing Personal Consumption Expenditures Price Index (logged change is inflation)
+UMICH= Continuous variable showing index for University of Michigan's consumer sentiment survey (logged change is % change in the index)
+Total.Plays= Continuous variable showing total monthly plays for a given month.
+
 ```{r}
 #For all of these regressions, I took out the summaries because they will simply be put into my stargazer tables. 
-
 totalplayreg=lm(Total.Month.Plays ~ REC + UNRATE + log(PCE) + log(UMICH), data=dategroup)
 #Regresses total Plays with a linear model(lm) on the Recession dummy, the U3 Unemployment Rate, the percent change in the PCE price index (inflation) and a percent change in the UMICH survey, it uses the dategroup as its data.
 logtotalplayreg=lm(log(Total.Month.Plays) ~ REC + UNRATE + log(PCE) + log(UMICH), data=dategroup)
